@@ -1,11 +1,10 @@
 Package: fishr
-Title: What the Package Does (One Line, Title Case)
+Title: Calcualte standard catch metrics for fisheries
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Jill", "Campbell", , "jill.campbell@dfo-mpo.gc.ca", role = c("aut", "cre"))
+Description: Provides functions for calculating and analyzing fisheries catch data, such as Catch Per Unit Effort (CPUE), a fundamental metric in fisheries science.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
