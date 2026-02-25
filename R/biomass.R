@@ -3,16 +3,18 @@
 #' Calculates biomass index from CPUE and area swept. Can optionally
 #' compute CPUE from catch and effort data.
 #'
-#' @param cpue Numeric vector of CPUE values. If `catch` and `effort` are
-#'   provided, this is computed automatically.
-#' @param area_swept Numeric vector of area swept (e.g., km²)
-#' @param verbose Logical indicating whether to print processing messages (default is FALSE, also accepts the value of 'fishr.verbose')
-#' @param catch Optional numeric vector of catch. If provided with `effort`,
-#'   CPUE is computed via `cpue()`.
-#' @param effort Optional numeric vector of effort. Required if `catch` is
-#'   provided.
-#' @param ... Additional arguments passed to `cpue()` when computing from
-#'   catch and effort (e.g., `method`, `gear_factor`).
+#' @param cpue Numeric vector of CPUE values.
+#' @param area_swept Numeric vector of area swept e.g. km²
+#' @inheritParams cpue
+#' @inheritDotParams cpue -catch -effort
+#'
+#' @details
+#' Two modes of use:
+#'
+#' - Provide 'cpue' directly
+#' - Provide 'catch' and 'effort' separately
+#'
+#' @seealso See [cpue()] for more details.
 #'
 #' @return A numeric vector of biomass index values
 #' @export

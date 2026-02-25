@@ -7,10 +7,11 @@
 #'
 #' @return Invisible `NULL`. Called for its side effect of
 #'   stopping with an error if validation fails.
-#'
-#' @noRd
 #' noRd means manual will be created for this, we don't want users to be able to use this function, its just for internal package use
 #' also no export tag
+#' @noRd
+#'
+
 validate_numeric_inputs <- function(...) {
   args <- list(...)
   arg_names <- names(args)
