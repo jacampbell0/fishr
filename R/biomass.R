@@ -6,6 +6,7 @@
 #' @param cpue Numeric vector of CPUE values. If `catch` and `effort` are
 #'   provided, this is computed automatically.
 #' @param area_swept Numeric vector of area swept (e.g., km²)
+#' @param verbose Logical indicating whether to print processing messages (default is FALSE, also accepts the value of 'fishr.verbose')
 #' @param catch Optional numeric vector of catch. If provided with `effort`,
 #'   CPUE is computed via `cpue()`.
 #' @param effort Optional numeric vector of effort. Required if `catch` is
@@ -33,6 +34,7 @@
 biomass_index <- function(
   cpue = NULL, #we want to make sure cpue isn't calculated here
   area_swept,
+  verbose = getOption("fishr.verbose", default = FALSE),
   catch = NULL, #by passing catch and effort we can point biomass to cpue
   effort = NULL,
   ...
@@ -46,6 +48,8 @@ biomass_index <- function(
   if (is.null(cpue)) {
     stop("Must provide either 'cpue' or both 'catch' and 'effort'.")
   }
-
+  if (verbose) {
+    message("Calculating biomass for ", length(cpue), " records")
+  }
   cpue * area_swept
 }
