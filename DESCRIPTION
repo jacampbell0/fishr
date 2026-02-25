@@ -11,6 +11,7 @@ RoxygenNote: 7.3.3
 URL: https://github.com/jacampbell0/fishr
 BugReports: https://github.com/jacampbell0/fishr/issues
 Suggests: 
+    covr,
     testthat (>= 3.0.0),
     withr
 Config/testthat/edition: 3

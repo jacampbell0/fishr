@@ -11,8 +11,8 @@
 #' @details
 #' Two modes of use:
 #'
-#' - Provide 'cpue' directly
-#' - Provide 'catch' and 'effort' separately
+#' - Provide `cpue` directly
+#' - Provide `catch` and `effort` separately
 #'
 #' @seealso See [cpue()] for more details.
 #'
@@ -53,5 +53,6 @@ biomass_index <- function(
   if (verbose) {
     message("Calculating biomass for ", length(cpue), " records")
   }
+
   cpue * area_swept
 }

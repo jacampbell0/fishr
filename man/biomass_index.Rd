@@ -41,8 +41,8 @@ compute CPUE from catch and effort data.
 \details{
 Two modes of use:
 \itemize{
-\item Provide 'cpue' directly
-\item Provide 'catch' and 'effort' separately
+\item Provide \code{cpue} directly
+\item Provide \code{catch} and \code{effort} separately
 }
 }
 \examples{

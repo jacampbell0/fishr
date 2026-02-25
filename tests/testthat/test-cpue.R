@@ -92,3 +92,12 @@ test_that("cpue verbosity falls back to FALSE when not set", {
   )
 })
 # Options automatically restored after each test
+
+test_that("example with temporary file", {
+  temp_file <- withr::local_tempfile(lines = c("100,10", "200,20"))
+
+  # Test something with temp_file
+  lines <- readLines(temp_file)
+  expect_length(lines, 2)
+})
+# temp_file automatically deleted after test
