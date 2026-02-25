@@ -5,6 +5,7 @@
 #' @param catch Numeric vector of catch (e.g. kg)
 #' @param effort Numeric vector of effort (e.g. hours)
 #' @param gear_factor Numeric adjustment for gear standard (defaults is 1)
+#' @param verbose Logical indicating whether to print processing messages (default is FALSE)
 #'
 #' @returns Numeric vector of CPUE values
 #' @export
@@ -14,7 +15,10 @@
 #' cpue(100, 10, gear_factor = 0.5)
 
 
-cpue <- function(catch, effort, gear_factor = 1) {
+cpue <- function(catch, effort, gear_factor = 1, verbose = FALSE) {
+  if (verbose) {
+    message("Processing ", length(catch), " records")
+  }
   raw_cpue <- catch / effort
 
   raw_cpue * gear_factor
