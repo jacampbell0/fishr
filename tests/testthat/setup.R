@@ -7,4 +7,3 @@ reference_data <- data.frame(
   effort = c(10, 10, 10),
   expected_cpue = c(10, 20, 30)
 )
-
