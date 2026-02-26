@@ -43,7 +43,7 @@ test_that("cpue works with generated data", {
 
   expect_equal_numbers(
     result,
-    c(34.053, 9.065, 19.239, 135.640, 6.372), #dput(cpue(data$catch, data$effort)) provides a vector you can paste
+    c(34.052837, 9.064945, 19.238772, 135.640053, 6.371919), #dput(cpue(data$catch, data$effort)) provides a vector you can paste
     tolerance = 1e-2
   )
 })
