@@ -4,7 +4,7 @@
       cpue("five", 10)
     Condition
       Error:
-      ! 'catch' must be numeric, got character.
+      ! Unsupported input type for cpue(): character
 
 # cpue warns when catch and effort lengths differ
 
@@ -14,7 +14,11 @@
       Warning in `catch / effort`:
       longer object length is not a multiple of shorter object length
     Output
-      [1] 10 10 30
+      CPUE Result
+      Records:      3 
+      Method:       ratio 
+      Gear type:    nordic_gillnet 
+      Values:       10 10 30 
 
 # cpue uses verbosity when option set to TRUE
 
@@ -23,5 +27,36 @@
     Message
       Processing 1 records
     Output
-      [1] 10
+      CPUE Result
+      Records:      1 
+      Method:       ratio 
+      Gear type:    nordic_gillnet 
+      Values:       10 
+
+# print.cpue_result displays expected output
+
+    Code
+      print(result)
+    Output
+      CPUE Result
+      Records:      3 
+      Method:       ratio 
+      Gear type:    nordic_gillnet 
+      Values:       10 10 20 
+
+# cpue.data.frame errors on missing columns
+
+    Code
+      cpue(df)
+    Condition
+      Error:
+      ! Column 'catch' not found in data frame.
+
+# cpue.default gives informative error
+
+    Code
+      cpue("not valid")
+    Condition
+      Error:
+      ! Unsupported input type for cpue(): character
 

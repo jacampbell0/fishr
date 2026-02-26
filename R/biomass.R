@@ -5,8 +5,9 @@
 #'
 #' @param cpue Numeric vector of CPUE values.
 #' @param area_swept Numeric vector of area swept e.g. km²
-#' @inheritParams cpue
-#' @inheritDotParams cpue -catch -effort
+#' @param catch Numeric vector of catch (e.g., kg).
+#' @inheritParams cpue.numeric
+#' @inheritDotParams cpue
 #'
 #' @details
 #' Two modes of use:
