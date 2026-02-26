@@ -25,7 +25,7 @@ biomass_index(
 \item{effort}{Numeric vector of effort (e.g. hours)}
 
 \item{...}{
-  Arguments passed on to \code{\link[=cpue]{cpue}}
+  Arguments passed on to \code{\link[=cpue.numeric]{cpue.numeric}}
   \describe{
     \item{\code{gear_factor}}{Numeric adjustment for gear standard (defaults is 1)}
     \item{\code{method}}{Character: one of "ratio" or "log"; will take "ratio" as default}
