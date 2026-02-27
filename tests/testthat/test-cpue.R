@@ -23,7 +23,7 @@ test_that("cpue returns numeric values", {
   expect_type(cpue(100, 10), "double")
 })
 
-test_that("cpue gear_factor scales correctly", {
+test_that("cpue gear_type scales correctly", {
   expect_equal_numbers(
     cpue(catch = 100, effort = 10, gear_type = "sinking_longline"),
     7.2
@@ -115,10 +115,6 @@ test_that("example with temporary file", {
   lines <- readLines(temp_file)
   expect_length(lines, 2)
 })
-
-
-# S3 TESTS
-
 # temp_file automatically deleted after test
 
 # TESTING S3 OBJECTS

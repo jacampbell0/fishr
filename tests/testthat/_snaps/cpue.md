@@ -17,7 +17,7 @@
       CPUE Result
       Records:      3 
       Method:       ratio 
-      Gear factor:  
+      Gear type:    nordic_gillnet 
       Values:       10 10 30 
 
 # cpue uses verbosity when option set to TRUE
@@ -30,7 +30,7 @@
       CPUE Result
       Records:      1 
       Method:       ratio 
-      Gear factor:  
+      Gear type:    nordic_gillnet 
       Values:       10 
 
 # print.cpue_result displays expected output
@@ -41,7 +41,7 @@
       CPUE Result
       Records:      3 
       Method:       ratio 
-      Gear factor:  
+      Gear type:    nordic_gillnet 
       Values:       10 10 20 
 
 # cpue.data.frame errors on missing columns

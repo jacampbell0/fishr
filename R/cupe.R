@@ -19,7 +19,6 @@ cpue <- function(catch, ...) {
 #' @param gear_type Character. Gear type used for sampling. Must be one of the
 #'   types in the internal `gear_types` table. Defaults to `"nordic_gillnet"`,
 #'   the standard reference gear (factor = 1.0).
-#' @param gear_factor Numeric adjustment for gear standard (defaults is 1)
 #' @param method Character: one of "ratio" or "log"; will take "ratio" as default
 #' @param verbose Logical indicating whether to print processing messages (default is FALSE, also accepts the value of 'fishr.verbose')
 #'
@@ -47,12 +46,6 @@ cpue.numeric <- function(
   }
 
   gear_factor <- gear_types$gear_factor[gear_types$gear_type == gear_type]
-
-  if (is.null(gear_factor)) {
-    stop(
-      "gear_factor is deprecated, use gear_type"
-    )
-  }
 
   method <- match.arg(method)
 
@@ -98,7 +91,6 @@ cpue.numeric <- function(
 cpue.data.frame <- function(
   catch,
   gear_type = "nordic_gillnet",
-  gear_factor = 1,
   method = c("ratio", "log"),
   verbose = getOption("fishr.verbose", FALSE),
   ...
@@ -128,32 +120,6 @@ cpue.default <- function(catch, ...) {
   stop("Unsupported input type for cpue(): ", class(catch), call. = FALSE)
 }
 
-#' @export
-print.cpue_result <- function(x, ...) {
-  #lesson 8 - OOP: Writing a print method
-  #cat("CPUE Results for", length(x), "records\n")
-  #cat("Values:", round(x, 2), "\n")
-  #lesson 8 - OOP: Create a constructor function
-  cat("CPUE Result\n")
-  cat("Records:     ", attr(x, "n_records"), "\n")
-  cat("Method:      ", attr(x, "method"), "\n")
-  cat("Gear type:   ", attr(x, "gear_type"), "\n")
-  cat("Values:      ", round(x, 2), "\n")
-  invisible(x)
-}
-
-
-#' @export
-#create a class specific print function
-print.cpue_result <- function(x, ...) {
-  cat("CPUE Result\n")
-  cat("Records:     ", attr(x, "n_records"), "\n")
-  cat("Method:      ", attr(x, "method"), "\n")
-  cat("Gear factor: ", attr(x, "gear_factor"), "\n")
-  cat("Values:      ", round(x, 2), "\n")
-  invisible(x) #you want the function to return the unaltered value of the inputs. This allows you to use x later on after the function
-}
-
 #' @noRd
 new_cpue_result <- function(values, method, gear_type, n_records) {
   structure(
@@ -163,6 +129,17 @@ new_cpue_result <- function(values, method, gear_type, n_records) {
     n_records = n_records,
     class = "cpue_result" # class is a special attribute
   )
+}
+
+#' @export
+#create a class specific print function
+print.cpue_result <- function(x, ...) {
+  cat("CPUE Result\n")
+  cat("Records:     ", attr(x, "n_records"), "\n")
+  cat("Method:      ", attr(x, "method"), "\n")
+  cat("Gear type:   ", attr(x, "gear_type"), "\n")
+  cat("Values:      ", round(x, 2), "\n")
+  invisible(x) #you want the function to return the unaltered value of the inputs. This allows you to use x later on after the function
 }
 
 #' @export

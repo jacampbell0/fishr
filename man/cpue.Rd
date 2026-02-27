@@ -21,7 +21,6 @@ cpue(catch, ...)
 \method{cpue}{data.frame}(
   catch,
   gear_type = "nordic_gillnet",
-  gear_factor = 1,
   method = c("ratio", "log"),
   verbose = getOption("fishr.verbose", FALSE),
   ...
@@ -44,8 +43,6 @@ the standard reference gear (factor = 1.0).}
 \item{method}{Character: one of "ratio" or "log"; will take "ratio" as default}
 
 \item{verbose}{Logical indicating whether to print processing messages (default is FALSE, also accepts the value of 'fishr.verbose')}
-
-\item{gear_factor}{Numeric adjustment for gear standard (defaults is 1)}
 }
 \value{
 Numeric vector of CPUE values of the class 'my_cpue'
