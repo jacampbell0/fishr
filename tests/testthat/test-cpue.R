@@ -1,14 +1,11 @@
 test_that("cpue calculates simple ratio correctly", {
-<<<<<<< HEAD
   expect_equal_numbers(cpue(catch = 100, effort = 10), 10)
   expect_equal_numbers(cpue(catch = 50, effort = 25), 2)
-=======
   #expect_equal(cpue(catch = 100, effort = 10), 10)
   #expect_equal(cpue(catch = 50, effort = 25), 2)
 
   result <- cpue(c(100, 200), c(10, 20))
   expect_s3_class(result, "cpue_result")
->>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
 })
 
 test_that("cpue works with vectors of data", {
@@ -16,13 +13,10 @@ test_that("cpue works with vectors of data", {
   efforts <- c(10, 10, 10)
   expected_results <- c(10, 20, 30)
 
-<<<<<<< HEAD
   expect_equal_numbers(cpue(catches, efforts), expected_results)
-=======
   #expect_equal(cpue(catches, efforts), expected_results)
   result <- cpue(c(100, 200), c(10, 20))
   expect_s3_class(result, "cpue_result")
->>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
 })
 
 test_that("cpue returns numeric values", {
@@ -30,14 +24,11 @@ test_that("cpue returns numeric values", {
 })
 
 test_that("cpue gear_factor scales correctly", {
-<<<<<<< HEAD
   expect_equal_numbers(
     cpue(catch = 100, effort = 10, gear_type = "sinking_longline"),
     7.2
   )
-=======
-  expect_equal_numbers(cpue(catch = 100, effort = 10, gear_factor = 0.5), 5)
->>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
+  #expect_equal_numbers(cpue(catch = 100, effort = 10, gear_factor = 0.5), 5)
   expect_equal_numbers(
     cpue(catch = 100, effort = 10),
     cpue(catch = 100, effort = 10, gear_type = "nordic_gillnet")
@@ -60,11 +51,7 @@ test_that("cpue works with generated data", {
   expect_equal_numbers(
     result,
     c(34.052837, 9.064945, 19.238772, 135.640053, 6.371919), #dput(cpue(data$catch, data$effort)) provides a vector you can paste
-<<<<<<< HEAD
-    tolerance = 1e-3
-=======
     tolerance = 1e-2
->>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
   )
 })
 
@@ -128,15 +115,13 @@ test_that("example with temporary file", {
   lines <- readLines(temp_file)
   expect_length(lines, 2)
 })
-<<<<<<< HEAD
+
 
 # S3 TESTS
 
-=======
 # temp_file automatically deleted after test
 
 # TESTING S3 OBJECTS
->>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
 test_that("cpue() returns a cpue_result object", {
   result <- cpue(c(100, 200), c(10, 20))
   expect_s3_class(result, "cpue_result")
@@ -145,11 +130,7 @@ test_that("cpue() returns a cpue_result object", {
 test_that("cpue_result carries calculation metadata", {
   result <- cpue(c(100, 200, 300), c(10, 20, 15), method = "log")
   expect_equal(attr(result, "method"), "log")
-<<<<<<< HEAD
   expect_equal(attr(result, "gear_type"), "nordic_gillnet")
-=======
-  expect_equal(attr(result, "gear_factor"), 1)
->>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
   expect_equal(attr(result, "n_records"), 3)
 })
 
@@ -157,7 +138,6 @@ test_that("print.cpue_result displays expected output", {
   result <- cpue(c(100, 200, 300), c(10, 20, 15))
   expect_snapshot(print(result))
 })
-<<<<<<< HEAD
 
 test_that("cpue.data.frame dispatches correctly", {
   fishing_data <- data.frame(
@@ -177,5 +157,3 @@ test_that("cpue.data.frame errors on missing columns", {
 test_that("cpue.default gives informative error", {
   expect_snapshot(cpue("not valid"), error = TRUE)
 })
-=======
->>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6

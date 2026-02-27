@@ -20,14 +20,17 @@ biomass_index(
 
 \item{verbose}{Logical indicating whether to print processing messages (default is FALSE, also accepts the value of 'fishr.verbose')}
 
-\item{catch}{Numeric vector of catch (e.g., kg).}
+\item{catch}{Numeric vector of catch (e.g. kg)}
 
 \item{effort}{Numeric vector of effort (e.g. hours)}
 
 \item{...}{
   Arguments passed on to \code{\link[=cpue.numeric]{cpue.numeric}}
   \describe{
-    \item{\code{}}{}
+    \item{\code{gear_type}}{Character. Gear type used for sampling. Must be one of the
+types in the internal \code{gear_types} table. Defaults to \code{"nordic_gillnet"},
+the standard reference gear (factor = 1.0).}
+    \item{\code{method}}{Character: one of "ratio" or "log"; will take "ratio" as default}
   }}
 }
 \value{
