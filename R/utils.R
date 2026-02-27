@@ -33,9 +33,14 @@ validate_numeric_inputs <- function(...) {
 }
 
 standardize_effort <- function(catch, effort_hours) {
+  browser()
   validate_numeric_inputs(catch = catch, effort_hours = effort_hours)
 
   effort_days <- effort_hours / 24
+<<<<<<< HEAD
+=======
+  print(paste0("effort_days is ", effort_days))
+>>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
 
   cpue(catch = catch, effort = effort_days)
 }

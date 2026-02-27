@@ -14,12 +14,17 @@ cpue(catch, ...)
   effort,
   gear_type = "nordic_gillnet",
   method = c("ratio", "log"),
-  verbose = getOption("fishr.verbose", default = FALSE)
+  verbose = getOption("fishr.verbose", default = FALSE),
+  ...
 )
 
 \method{cpue}{data.frame}(
   catch,
+<<<<<<< HEAD
   gear_type = "nordic_gillnet",
+=======
+  gear_factor = 1,
+>>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
   method = c("ratio", "log"),
   verbose = getOption("fishr.verbose", FALSE),
   ...
@@ -28,10 +33,16 @@ cpue(catch, ...)
 \method{cpue}{default}(catch, ...)
 }
 \arguments{
+<<<<<<< HEAD
 \item{catch}{Input data: a numeric vector of catch values, or a data frame
 containing catch and effort columns.}
 
 \item{...}{Additional arguments passed to methods.}
+=======
+\item{catch}{Numeric vector of catch (e.g. kg) or a data frame of "catch" and "effort" columns}
+
+\item{...}{Additional arguments passed on to methods}
+>>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
 
 \item{effort}{Numeric vector of effort (e.g. hours)}
 
@@ -44,7 +55,7 @@ the standard reference gear (factor = 1.0).}
 \item{verbose}{Logical indicating whether to print processing messages (default is FALSE, also accepts the value of 'fishr.verbose')}
 }
 \value{
-Numeric vector of CPUE values
+Numeric vector of CPUE values of the class 'my_cpue'
 }
 \description{
 Calculates CPUE from catch and effort data, with optional gear

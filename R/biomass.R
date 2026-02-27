@@ -4,10 +4,16 @@
 #' compute CPUE from catch and effort data.
 #'
 #' @param cpue Numeric vector of CPUE values.
+#' @param catch Numeric vector of catch (e.g. kg)
 #' @param area_swept Numeric vector of area swept e.g. km²
+<<<<<<< HEAD
 #' @param catch Numeric vector of catch (e.g., kg).
 #' @inheritParams cpue.numeric
 #' @inheritDotParams cpue
+=======
+#' @inheritParams cpue.numeric
+#' @inheritDotParams cpue.numeric
+>>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
 #'
 #' @details
 #' Two modes of use:

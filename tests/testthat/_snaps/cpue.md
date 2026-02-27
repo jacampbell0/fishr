@@ -17,7 +17,11 @@
       CPUE Result
       Records:      3 
       Method:       ratio 
+<<<<<<< HEAD
       Gear type:    nordic_gillnet 
+=======
+      Gear factor:  1 
+>>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
       Values:       10 10 30 
 
 # cpue uses verbosity when option set to TRUE
@@ -30,7 +34,11 @@
       CPUE Result
       Records:      1 
       Method:       ratio 
+<<<<<<< HEAD
       Gear type:    nordic_gillnet 
+=======
+      Gear factor:  1 
+>>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
       Values:       10 
 
 # print.cpue_result displays expected output
@@ -41,6 +49,7 @@
       CPUE Result
       Records:      3 
       Method:       ratio 
+<<<<<<< HEAD
       Gear type:    nordic_gillnet 
       Values:       10 10 20 
 
@@ -59,4 +68,8 @@
     Condition
       Error:
       ! Unsupported input type for cpue(): character
+=======
+      Gear factor:  1 
+      Values:       10 10 20 
+>>>>>>> 63b5d8ce50c6743dfadbb9ea34d774b9d28dbda6
 
