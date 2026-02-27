@@ -1,17 +1,24 @@
 #' Calculate Catch Per Unit Effort (CPUE)
 #'
-#' Calculates CPUE from catch and effort data, with optional gear standardization.
+#' Calculates CPUE from catch and effort data, with optional gear
+#' standardization. Supports ratio and log-transformed methods.
 #'
-#' @param catch Numeric vector of catch (e.g. kg) or a data frame of "catch" and "effort" columns
-#' @param ... Additional arguments passed on to methods
+#' @param catch Input data: a numeric vector of catch values, or a data frame
+#'   containing catch and effort columns.
+#' @param ... Additional arguments passed to methods.
+#'
 #'
 #' @export
 cpue <- function(catch, ...) {
   UseMethod("cpue")
 }
 
+
 #' @rdname cpue
 #' @param effort Numeric vector of effort (e.g. hours)
+#' @param gear_type Character. Gear type used for sampling. Must be one of the
+#'   types in the internal `gear_types` table. Defaults to `"nordic_gillnet"`,
+#'   the standard reference gear (factor = 1.0).
 #' @param gear_factor Numeric adjustment for gear standard (defaults is 1)
 #' @param method Character: one of "ratio" or "log"; will take "ratio" as default
 #' @param verbose Logical indicating whether to print processing messages (default is FALSE, also accepts the value of 'fishr.verbose')
@@ -21,16 +28,32 @@ cpue <- function(catch, ...) {
 #'
 #' @examples
 #' cpue(100, 10)
-#' cpue(100, 10, gear_factor = 0.5)
+#' cpue(100, 10, gear_type = "nordic_gillnet")
 
 cpue.numeric <- function(
   catch,
   effort,
-  gear_factor = 1,
+  gear_type = "nordic_gillnet",
   method = c("ratio", "log"),
   verbose = getOption("fishr.verbose", default = FALSE), #verbose needs T or F and this parameter can be set at the package level
   ...
 ) {
+  if (!gear_type %in% gear_types$gear_type) {
+    stop(
+      "'gear_type' must be one of: ",
+      paste(gear_types$gear_type, collapse = ", "),
+      call. = FALSE
+    )
+  }
+
+  gear_factor <- gear_types$gear_factor[gear_types$gear_type == gear_type]
+
+  if (is.null(gear_factor)) {
+    stop(
+      "gear_factor is deprecated, use gear_type"
+    )
+  }
+
   method <- match.arg(method)
 
   validate_numeric_inputs(catch = catch, effort = effort)
@@ -40,12 +63,15 @@ cpue.numeric <- function(
   }
 
   raw_cpue <- switch(
-    #switch() function selects which expression to evaluate based on the value of method. It’s a clean alternative to a chain of if/else if statements when dispatching on a single value
     method,
     ratio = catch / effort,
     log = log(catch / effort)
   )
 
+  #original result
+  #raw_cpue * gear_factor
+
+  #lesson 8 - OOP: Adding metadata with attributes
   #result <- raw_cpue * gear_factor
   #attr(result, "gear_factor") <- gear_factor
   #attr(result, "n_records") <- length(catch)
@@ -53,11 +79,16 @@ cpue.numeric <- function(
   #class(result) <- "cpue_result"
   #result
 
+  #lesson 8 - OOP: Create a constructor function
+  # new_cpue_result(
+  #   values = raw_cpue * gear_factor,
+  #   method = method,
+  #   gear_type = gear_type,
+
   new_cpue_result(
     raw_cpue * gear_factor,
-
     method = method,
-    gear_factor = gear_factor,
+    gear_type = gear_type,
     n_records = length(catch)
   )
 }
@@ -66,6 +97,7 @@ cpue.numeric <- function(
 #' @export
 cpue.data.frame <- function(
   catch,
+  gear_type = "nordic_gillnet",
   gear_factor = 1,
   method = c("ratio", "log"),
   verbose = getOption("fishr.verbose", FALSE),
@@ -83,7 +115,7 @@ cpue.data.frame <- function(
   cpue(
     catch = catch[["catch"]], #or catch$catch
     effort = catch[["effort"]], # or catch$effort
-    gear_factor = gear_factor,
+    gear_type = gear_type,
     method = method,
     verbose = verbose,
     ...
@@ -94,6 +126,20 @@ cpue.data.frame <- function(
 #' @export
 cpue.default <- function(catch, ...) {
   stop("Unsupported input type for cpue(): ", class(catch), call. = FALSE)
+}
+
+#' @export
+print.cpue_result <- function(x, ...) {
+  #lesson 8 - OOP: Writing a print method
+  #cat("CPUE Results for", length(x), "records\n")
+  #cat("Values:", round(x, 2), "\n")
+  #lesson 8 - OOP: Create a constructor function
+  cat("CPUE Result\n")
+  cat("Records:     ", attr(x, "n_records"), "\n")
+  cat("Method:      ", attr(x, "method"), "\n")
+  cat("Gear type:   ", attr(x, "gear_type"), "\n")
+  cat("Values:      ", round(x, 2), "\n")
+  invisible(x)
 }
 
 
@@ -109,11 +155,11 @@ print.cpue_result <- function(x, ...) {
 }
 
 #' @noRd
-new_cpue_result <- function(values, method, gear_factor, n_records) {
+new_cpue_result <- function(values, method, gear_type, n_records) {
   structure(
     values, # The data
     method = method, # Attributes specifying metadata
-    gear_factor = gear_factor,
+    gear_type = gear_type,
     n_records = n_records,
     class = "cpue_result" # class is a special attribute
   )
@@ -125,6 +171,7 @@ summary.cpue_result <- function(object, ...) {
   cat("---------------------\n")
   cat("Method:      ", attr(object, "method"), "\n")
   cat("Records:     ", attr(object, "n_records"), "\n")
+  cat("Gear type:   ", attr(object, "gear_type"), "\n")
   cat("Gear factor: ", attr(object, "gear_factor"), "\n")
   cat("Mean CPUE:   ", round(mean(object), 2), "\n")
   cat("Median CPUE: ", round(stats::median(object), 2), "\n")

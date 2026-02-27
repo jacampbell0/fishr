@@ -27,7 +27,9 @@ biomass_index(
 \item{...}{
   Arguments passed on to \code{\link[=cpue.numeric]{cpue.numeric}}
   \describe{
-    \item{\code{gear_factor}}{Numeric adjustment for gear standard (defaults is 1)}
+    \item{\code{gear_type}}{Character. Gear type used for sampling. Must be one of the
+types in the internal \code{gear_types} table. Defaults to \code{"nordic_gillnet"},
+the standard reference gear (factor = 1.0).}
     \item{\code{method}}{Character: one of "ratio" or "log"; will take "ratio" as default}
   }}
 }

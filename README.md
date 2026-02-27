@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/jacampbell0/fishr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jacampbell0/fishr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of fishr is to …
+The goal of fishr is to provide functions for calculating and analyzing fisheries catch data, such as Catch Per Unit Effort (CPUE), a fundamental metric in fisheries science.
 
 ## Installation
 

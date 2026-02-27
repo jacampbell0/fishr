@@ -17,7 +17,7 @@
       CPUE Result
       Records:      3 
       Method:       ratio 
-      Gear factor:  1 
+      Gear factor:  
       Values:       10 10 30 
 
 # cpue uses verbosity when option set to TRUE
@@ -30,7 +30,7 @@
       CPUE Result
       Records:      1 
       Method:       ratio 
-      Gear factor:  1 
+      Gear factor:  
       Values:       10 
 
 # print.cpue_result displays expected output
@@ -41,6 +41,22 @@
       CPUE Result
       Records:      3 
       Method:       ratio 
-      Gear factor:  1 
+      Gear factor:  
       Values:       10 10 20 
+
+# cpue.data.frame errors on missing columns
+
+    Code
+      cpue(df)
+    Condition
+      Error:
+      ! Column 'catch' not found in data frame.
+
+# cpue.default gives informative error
+
+    Code
+      cpue("not valid")
+    Condition
+      Error:
+      ! Unsupported input type for cpue(): character
 
